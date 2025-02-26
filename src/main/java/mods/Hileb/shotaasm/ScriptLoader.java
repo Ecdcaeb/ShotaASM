@@ -58,8 +58,8 @@ public class ScriptLoader {
                             s -> {
                                 try {
                                     return Launch.classLoader.findClass(s);
-                                } catch (ClassNotFoundException e){
-                                    throw new RuntimeException(e);
+                                } catch (ClassNotFoundException e2){
+                                    throw new RuntimeException(e2);
                                 }
                             }).collect(Collectors.toSet()));
                 }

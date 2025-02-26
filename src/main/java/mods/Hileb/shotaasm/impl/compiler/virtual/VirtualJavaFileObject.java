@@ -3,6 +3,7 @@ package mods.Hileb.shotaasm.impl.compiler.virtual;
 import javax.tools.SimpleJavaFileObject;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
+import java.io.IOException;
 
 public class VirtualJavaFileObject extends SimpleJavaFileObject {
 
