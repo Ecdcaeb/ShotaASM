@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class ScriptLoader {
     private static Collection<IScriptLocator> locators;
-    private static HashMap<String, IScriptCompiler> compilers;
+    private static HashMap<String, IScriptCompiler> compilers = new HashMap<>();
 
     public static void initialize() {
        locators = loadServices(IScriptLocator.class).stream().map( aClass -> {
