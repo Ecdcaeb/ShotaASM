@@ -9,20 +9,12 @@ import top.outlands.foundation.boot.TransformerHolder;
 
 import java.util.*;
 
-import static net.minecraft.launchwrapper.Launch.classLoader;
-import static top.outlands.foundation.boot.Foundation.LOGGER;
-import static top.outlands.foundation.boot.TransformerHolder.*;
-
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 import top.outlands.foundation.IExplicitTransformer;
 
 public class TransformerRegistry {
-    
-    public static void registerRenameTransformer(IClassNameTransformer transformer) {
-        TransformerDelegate.registerRenameTransformer(transformer);
-    }
 
     public static void registerExplicitTransformer(final int priorty, final IExplicitTransformer transformer, String... targets) {
         TransformerDelegate.registerExplicitTransformer(new IExplicitTransformer() {
@@ -80,7 +72,7 @@ public class TransformerRegistry {
     }
 
     public static void registerClassTransformer(IClassTransformer transformer) {
-        TransformerDelegate.registerClassTransformer(transformer);
+        TransformerDelegate.registerTransformer(transformer);
     }
 
     public static void unregisterClassTransformer(IClassTransformer transformer) {
