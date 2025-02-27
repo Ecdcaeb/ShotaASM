@@ -4,13 +4,14 @@ import mods.Hileb.shotaasm.api.IScriptCompiler;
 import mods.Hileb.shotaasm.api.ScriptFile;
 import mods.Hileb.shotaasm.impl.compiler.Compiler;
 import net.minecraft.launchwrapper.Launch;
+import java.util.*;
 
 import java.lang.reflect.InvocationTargetException;
 
 public class ShotaCompiler implements IScriptCompiler {
     @Override
     public String name() {
-        return "shota";
+        return "javaShota";
     }
 
     @Override

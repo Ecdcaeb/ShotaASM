@@ -31,16 +31,16 @@ public class TransformerRegistry {
         }, targets);
     }
 
-    public static void registerASMExplicitTransformer(final Consumer<ClassNode> transformer, String... targets) {
+    public static void registerASMExplicitTransformer(final int priorty, final Consumer<ClassNode> transformer, String... targets) {
         TransformerDelegate.registerExplicitTransformer(new IExplicitTransformer() {
             
             @Override
             public byte[] transform(byte[] basicClass) {
-                ClassReader classReader = new ClassReader(bytes);
+                ClassReader classReader = new ClassReader(basicClass);
                 ClassNode classNode = new ClassNode();
                 classReader.accept(classNode, 0);
                 transformer.apply(classNode);
-                ClassWriter classWriter = new ClassWriter(classNode);
+                ClassWriter classWriter = new ClassWriter(0);
                 classNode.accept(classWriter);
                 return classWriter.toByteArray();
             }
@@ -52,15 +52,15 @@ public class TransformerRegistry {
         }, targets);
     }
 
-    public static void registerASMExplicitTransformer(final int priorty, final Consumer<ClassNode> transformer, String... targets) {
+    public static void registerASMExplicitTransformer(final Consumer<ClassNode> transformer, String... targets) {
         TransformerDelegate.registerExplicitTransformer(new IExplicitTransformer() {
             @Override
             public byte[] transform(byte[] basicClass) {
-                ClassReader classReader = new ClassReader(bytes);
+                ClassReader classReader = new ClassReader(basicClass);
                 ClassNode classNode = new ClassNode();
                 classReader.accept(classNode, 0);
                 transformer.apply(classNode);
-                ClassWriter classWriter = new ClassWriter(classNode);
+                ClassWriter classWriter = new ClassWriter(0);
                 classNode.accept(classWriter);
                 return classWriter.toByteArray();
             }
