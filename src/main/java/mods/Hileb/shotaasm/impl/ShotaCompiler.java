@@ -30,7 +30,7 @@ public class ShotaCompiler implements IScriptCompiler {
                 .append("import org.objectweb.asm.commons.*;")
                 .append("import org.objectweb.asm.signature.*;")
                 .append("import static org.objectweb.asm.Opcodes.*;")
-                .append("public ").append(singleName).append(" implements Runnable { ")
+                .append("public class ").append(singleName).append(" implements Runnable { ")
                 .append("    public void run() { ")
                 .append(file.text())
                 .append("}}");
