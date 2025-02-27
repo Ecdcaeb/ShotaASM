@@ -2,7 +2,7 @@ package mods.Hileb.shotaasm.impl;
 
 import mods.Hileb.shotaasm.api.IScriptCompiler;
 import mods.Hileb.shotaasm.api.ScriptFile;
-import mods.Hileb.shotaasm.impl.compiler.Compiler;
+import mods.Hileb.shotaasm.impl.compiler.*;
 import net.minecraft.launchwrapper.Launch;
 import java.util.*;
 

@@ -8,7 +8,7 @@ import net.minecraft.launchwrapper.IClassTransformer;
 import top.outlands.foundation.boot.TransformerHolder;
 
 import java.util.*;
-
+import java.util.function.*;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
