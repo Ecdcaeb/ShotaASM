@@ -39,7 +39,7 @@ public class TransformerRegistry {
                 ClassReader classReader = new ClassReader(basicClass);
                 ClassNode classNode = new ClassNode();
                 classReader.accept(classNode, 0);
-                transformer.apply(classNode);
+                transformer.accept(classNode);
                 ClassWriter classWriter = new ClassWriter(0);
                 classNode.accept(classWriter);
                 return classWriter.toByteArray();
@@ -59,7 +59,7 @@ public class TransformerRegistry {
                 ClassReader classReader = new ClassReader(basicClass);
                 ClassNode classNode = new ClassNode();
                 classReader.accept(classNode, 0);
-                transformer.apply(classNode);
+                transformer.accept(classNode);
                 ClassWriter classWriter = new ClassWriter(0);
                 classNode.accept(classWriter);
                 return classWriter.toByteArray();

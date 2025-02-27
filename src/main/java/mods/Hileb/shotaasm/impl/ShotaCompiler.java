@@ -45,7 +45,7 @@ public class ShotaCompiler implements IScriptCompiler {
                 }
                 return (Runnable) Class.forName(name, true, Launch.classLoader).getConstructor().newInstance();
             }
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
