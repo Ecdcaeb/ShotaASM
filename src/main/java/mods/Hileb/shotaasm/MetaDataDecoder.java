@@ -19,7 +19,7 @@ public class MetaDataDecoder {
         if (element instanceof JsonArray array) {
             Map<String, ModMetadata> map = HashMap.newHashMap(array.size());
             for (JsonElement element1 : array) {
-                ModMetadata modMetadata = decodeMetaData(element);
+                ModMetadata modMetadata = decodeMetaData(element1);
                 map.put(modMetadata.modId, modMetadata);
             }
             return map;
