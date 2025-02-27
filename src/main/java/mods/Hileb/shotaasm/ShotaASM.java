@@ -18,7 +18,7 @@ import java.io.File;
 public class ShotaASM implements IFMLLoadingPlugin {
     public static final String NAME = "ShotaASM";
     public static final String MOD_ID = "shotaasm";
-    public static final ModMetadata MOD_METADATA = MetaDataDecoder.decodeMcModInfo(ShotaASM.class.getResourceAsStream("mcmod.info")).get(MOD_ID);
+    public static final ModMetadata MOD_METADATA = MetaDataDecoder.decodeMcModInfo(ShotaASM.class.getResourceAsStream("/mcmod.info")).get(MOD_ID);
     public static final Logger LOGGER = LogManager.getLogger(NAME);
 
     public static File source = null;
