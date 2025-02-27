@@ -22,7 +22,7 @@ public class ShotaCompiler implements IScriptCompiler {
             builder.append("import ").append(s).append(";\n");
         }
         builder
-                .append("import top.outlands.foundation.TransformerDelegate;")
+                .append("import mods.Hileb.shotaasm.api.TransformerRegistry;")
                 .append("import org.objectweb.asm.*;")
                 .append("import org.objectweb.asm.tree.*;")
                 .append("import org.objectweb.asm.util.*;")
@@ -34,8 +34,16 @@ public class ShotaCompiler implements IScriptCompiler {
                 .append(file.text())
                 .append("}}");
         try {
-            return (Runnable) Launch.classLoader.defineClass(name, Compiler.compileSingle(name, builder.toString()))
-                    .getConstructor().newInstance();
+            Compiler compiler = new Compiler();
+            compiler.addSource(name, builder.toString());
+            CompileError error = compiler.compile();
+            if (error != null) throw new RuntimeException(error);
+            else {
+                for (Map.Entry<String, byte[]> entry : compiler.getClasses().entrySet()) {
+                    Launch.classLoader.defineClass(entry.getKey(), entry.getValue());
+                }
+                return (Runnable) Class.forName(name, true, Launch.classLoader).getConstructor().newInstance();
+            }
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
