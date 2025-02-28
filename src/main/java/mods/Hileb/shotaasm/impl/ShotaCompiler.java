@@ -31,14 +31,14 @@ public class ShotaCompiler implements IScriptCompiler {
             builder.append("import ").append(s).append(";\n");
         }
         builder
-                .append("import mods.Hileb.shotaasm.api.TransformerRegistry;")
-                .append("import mods.Hileb.shotaasm.api.ShotaContext;")
-                .append("import org.objectweb.asm.*;")
-                .append("import org.objectweb.asm.tree.*;")
-                .append("import org.objectweb.asm.util.*;")
-                .append("import org.objectweb.asm.commons.*;")
-                .append("import org.objectweb.asm.signature.*;")
-                .append("import static org.objectweb.asm.Opcodes.*;")
+                // .append("import mods.Hileb.shotaasm.api.TransformerRegistry;")
+                // .append("import mods.Hileb.shotaasm.api.ShotaContext;")
+                // .append("import org.objectweb.asm.*;")
+                // .append("import org.objectweb.asm.tree.*;")
+                // .append("import org.objectweb.asm.util.*;")
+                // .append("import org.objectweb.asm.commons.*;")
+                // .append("import org.objectweb.asm.signature.*;")
+                // .append("import static org.objectweb.asm.Opcodes.*;")
                 .append("public class ").append(singleName).append(" implements Runnable { ")
                 .append("    public void run() { ")
                 .append(file.text())
