@@ -6,6 +6,9 @@ import mods.Hileb.shotaasm.impl.compiler.*;
 import net.minecraft.launchwrapper.Launch;
 import java.util.*;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import java.lang.reflect.InvocationTargetException;
 
 public class ShotaCompiler implements IScriptCompiler {
@@ -24,6 +27,7 @@ public class ShotaCompiler implements IScriptCompiler {
         }
         builder
                 .append("import mods.Hileb.shotaasm.api.TransformerRegistry;")
+                .append("import mods.Hileb.shotaasm.api.ShotaContext;")
                 .append("import org.objectweb.asm.*;")
                 .append("import org.objectweb.asm.tree.*;")
                 .append("import org.objectweb.asm.util.*;")

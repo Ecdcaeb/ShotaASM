@@ -25,11 +25,13 @@ public class ShotaScriptLocator implements IScriptLocator {
 
         List<ScriptFile> list = new ArrayList<>();
         for (File file : root.listFiles()) {
-            try {
-                String name = file.getName();
-                list.add(ScriptFile.create(name, new String(IOUtils.toByteArray(Files.newBufferedReader(file.toPath()), StandardCharsets.UTF_8))));
-            } catch (IOException e) {
-                throw new RuntimeException("Could not read file", e);
+            if (file.isFile()) {
+                try {
+                    String name = file.getName();
+                    list.add(ScriptFile.create(name, new String(IOUtils.toByteArray(Files.newBufferedReader(file.toPath()), StandardCharsets.UTF_8))));
+                } catch (IOException e) {
+                    throw new RuntimeException("Could not read file", e);
+                }
             }
         }
         return list;

@@ -42,7 +42,7 @@ public class ScriptLoader {
 
     public static Collection<Runnable> loadScripts() {
         return locators.stream().map(IScriptLocator::getScripts).flatMap(Collection::stream)
-                .map((script) -> compilers.get(script.property().get("compiler").stream().findFirst().get())
+                .map((script) -> compilers.get(script.property().get("compiler").iterator().next())
                         .compile(script)).collect(Collectors.toSet());
     }
 

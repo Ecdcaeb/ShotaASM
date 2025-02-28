@@ -30,7 +30,7 @@ public record ScriptFile(String name, String text, Multimap<String, String> prop
                             map.put(s.substring(0, i), s.substring(i + 1));
                         }
                     }
-                    if (!map.containsKey("compiler")) map.put("compiler", "shota");
+                    if (!map.containsKey("compiler")) map.put("compiler", "javaShota");
                     return new ScriptFile(
                             name,
                             line + "\n" + reader.lines().collect(Collectors.joining("\n")),
