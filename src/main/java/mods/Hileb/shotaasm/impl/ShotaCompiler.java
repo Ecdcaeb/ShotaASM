@@ -12,6 +12,11 @@ import java.security.NoSuchAlgorithmException;
 import java.lang.reflect.InvocationTargetException;
 
 public class ShotaCompiler implements IScriptCompiler {
+
+    static {
+        mods.Hileb.shotaasm.dynamic.DynamicPackageInitializer.initialize();
+    }
+
     @Override
     public String name() {
         return "javaShota";
