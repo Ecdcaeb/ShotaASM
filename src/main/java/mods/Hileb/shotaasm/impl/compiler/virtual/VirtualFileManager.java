@@ -19,7 +19,7 @@ public class VirtualFileManager extends ForwardingJavaFileManager<StandardJavaFi
 
 
     @Override
-    public JavaFileObject getJavaFileForOutput(JavaFileManager.Location location, String className, JavaFileObject.Kind kind, FileObject sibling) throws IOException, IOException {
+    public JavaFileObject getJavaFileForOutput(Location location, String className, JavaFileObject.Kind kind, FileObject sibling) throws IOException, IOException {
         if (JavaFileObject.Kind.CLASS == kind) {
             VirtualJavaFileObject virtualJavaFileObject = new VirtualJavaFileObject(className, null);
             sources.put(className, virtualJavaFileObject);

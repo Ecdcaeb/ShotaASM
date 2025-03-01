@@ -28,7 +28,9 @@ public class ShotaScriptLocator implements IScriptLocator {
             if (file.isFile()) {
                 try {
                     String name = file.getName();
-                    list.add(ScriptFile.create(name, new String(IOUtils.toByteArray(Files.newBufferedReader(file.toPath()), StandardCharsets.UTF_8))));
+                    ScriptFile scriptFile = ScriptFile.create(name, new String(IOUtils.toByteArray(Files.newBufferedReader(file.toPath()), StandardCharsets.UTF_8)));
+                    scriptFile.data().put("file", file);
+                    list.add(scriptFile);
                 } catch (IOException e) {
                     throw new RuntimeException("Could not read file", e);
                 }

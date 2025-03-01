@@ -1,5 +1,6 @@
 package mods.Hileb.shotaasm;
 
+import com.google.common.collect.Iterables;
 import mods.Hileb.shotaasm.api.IScriptCompiler;
 import mods.Hileb.shotaasm.api.IScriptLocator;
 import net.minecraft.launchwrapper.Launch;
@@ -42,7 +43,7 @@ public class ScriptLoader {
 
     public static Collection<Runnable> loadScripts() {
         return locators.stream().map(IScriptLocator::getScripts).flatMap(Collection::stream)
-                .map((script) -> compilers.get(script.property().get("compiler").iterator().next())
+                .map((script) -> compilers.get(Iterables.getFirst(script.property().get("compiler"), null))
                         .compile(script)).collect(Collectors.toSet());
     }
 

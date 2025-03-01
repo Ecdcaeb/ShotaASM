@@ -2,16 +2,18 @@ package mods.Hileb.shotaasm.api;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public record ScriptFile(String name, String text, Multimap<String, String> property) {
+public record ScriptFile(String name, String text, Multimap<String, String> property, HashMap<String, Object> data) {
 
     @Nullable
     public static ScriptFile create(String name, String rawText){
@@ -31,10 +33,17 @@ public record ScriptFile(String name, String text, Multimap<String, String> prop
                         }
                     }
                     if (!map.containsKey("compiler")) map.put("compiler", "javaShota");
+
+                    byte[] b1 = IOUtils.toByteArray(reader, StandardCharsets.UTF_8);
+                    byte[] b2 = new byte[line.length() + 1 + b1.length];
+                    System.arraycopy(line.getBytes(), 0, b2, 0, line.length());
+                    b2[line.length()] = '\n';
+                    System.arraycopy(b1, line.length() + 1, b2, 0, b1.length);
+
                     return new ScriptFile(
                             name,
-                            line + "\n" + reader.lines().collect(Collectors.joining("\n")),
-                            map
+                            new String(b2),
+                            map, new HashMap<>()
                     );
                 }
             }

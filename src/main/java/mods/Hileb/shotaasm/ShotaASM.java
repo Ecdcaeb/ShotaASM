@@ -1,9 +1,12 @@
 package mods.Hileb.shotaasm;
 
 import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 import mods.Hileb.shotaasm.api.ShotaContext;
+import mods.Hileb.shotaasm.impl.ShotaCompiler;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
+import net.minecraftforge.fml.common.event.FMLStateEvent;
 import org.apache.logging.log4j.*;
 
 import net.minecraftforge.fml.common.DummyModContainer;
@@ -56,12 +59,18 @@ public class ShotaASM implements IFMLLoadingPlugin {
 
         @Override
         public boolean registerBus(EventBus bus, LoadController controller) {
+            bus.register(this);
             return true;
         }
 
         @Override
         public File getSource() {
             return source;
+        }
+
+        @Subscribe
+        public void onFMLState(FMLStateEvent event) {
+            ShotaCompiler.executeEvent(event.getEventType());
         }
 
     }
