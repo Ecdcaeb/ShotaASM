@@ -11,10 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ScriptLoader {
@@ -43,6 +40,7 @@ public class ScriptLoader {
 
     public static Collection<Runnable> loadScripts() {
         return locators.stream().map(IScriptLocator::getScripts).flatMap(Collection::stream)
+                .filter(Objects::nonNull)
                 .map((script) -> compilers.get(Iterables.getFirst(script.property().get("compiler"), null))
                         .compile(script)).collect(Collectors.toSet());
     }
