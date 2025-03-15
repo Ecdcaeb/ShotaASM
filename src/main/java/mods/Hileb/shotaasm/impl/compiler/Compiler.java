@@ -21,21 +21,20 @@ import java.util.Map;
 
 public class Compiler {
 
-    private final URL[] cp;
-
-    public Compiler(){
-        this.cp = null;
-    }
-
-    public Compiler(URL[] cp) {
-        this.cp = cp;
-    }
-
+    private final URL[] extraClasspath;
+    
     private final Map<String, VirtualJavaFileObject> javaFileObjectMap = new HashMap<>();
     private Map<String, byte[]> results = new HashMap<>();
 
     private DiagnosticListener<VirtualJavaFileObject> listener;
 
+    public Compiler(){
+        this(null);
+    }
+
+    public Compiler(URL[] extraClasspath) {
+        this.extraClasspath = extraClasspath;
+    }
 
     public void addSource(String name, String content) {
         javaFileObjectMap.put(name, new VirtualJavaFileObject(name, content));
@@ -67,35 +66,44 @@ public class Compiler {
     @SuppressWarnings("unchecked")
     public CompileError compile() {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-        StandardJavaFileManager standardJavaFileManager = compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8);
-
-        if (cp != null) {
-            try {
-                List<Path> paths = new LinkedList<>();
-                Iterables.addAll(paths, standardJavaFileManager.getLocationAsPaths(StandardLocation.CLASS_PATH));
-                for (URL url : cp) {
-                    paths.add(Paths.get(url.toURI()));
+        if (compiler == null) reture new CompileError("Could not found JavaCompiler, might not run in jdk.");
+        else {
+            try(StandardJavaFileManager standardJavaFileManager = compiler.getStandardFileManager(null, null, StandardCharsets.UTF_8)) {
+                VirtualFileManager fileManager = new VirtualFileManager(standardJavaFileManager, this.javaFileObjectMap);
+                List<String> options = null;
+                if (extraClasspath != null) {
+                    List<Path> pathList = new LinkedList<>();
+                    for (URL url : extraClasspath) { 
+                        try {
+                            pathList.add(new File(url.toURI()).getAbsolutePath());
+                        } catch (URISyntaxException ignored) {} // Ignore the lib.
+                    }
+                    String systemClasspath = System.getProperty("java.class.path");
+                    String combinedClasspath = String.join(File.pathSeparator, pathList) + File.pathSeparator + systemClasspath;
+                    options = new ArrayList<>();
+                    options.add("-classpath");
+                    options.add(combinedClasspath);
+                    options.add("-Xlint:unchecked");
                 }
-                standardJavaFileManager.setLocationFromPaths(StandardLocation.CLASS_PATH, paths);
-            } catch (URISyntaxException | IOException e) {
-                return new CompileError("Could not load classpath", e);
+                try {
+                    StringWriter stringWriter = new StringWriter();
+                    JavaCompiler.CompilationTask task = compiler.getTask(stringWriter, fileManager, (DiagnosticListener<? super JavaFileObject>)(Object) listener, options, null, javaFileObjectMap.values());
+                    if (task.call() == Boolean.TRUE) {
+                        this.results = fileManager.getClasses();
+                        return null;
+                    } else return new CompileError(stringWriter.toString());
+                } catch (Throwable e) {
+                    return new CompileError(e);
+                }
+            } catch (Throwable e) {
+                return new CompileError(e);
             }
-        }
-
-        VirtualFileManager fileManager = new VirtualFileManager(standardJavaFileManager, this.javaFileObjectMap);
-        try {
-            StringWriter stringWriter = new StringWriter();
-            JavaCompiler.CompilationTask task = compiler.getTask(stringWriter, fileManager, (DiagnosticListener<? super JavaFileObject>)(Object) listener, null, null, javaFileObjectMap.values());
-            if (task.call() == Boolean.TRUE) {
-                this.results = fileManager.getClasses();
-                return null;
-            } else return new CompileError(stringWriter.toString());
-        } catch (Exception e) {
-            return new CompileError(e);
         }
     }
 
     public void setListener(DiagnosticListener<VirtualJavaFileObject> listener) {
         this.listener = listener;
     }
+
+
 }
