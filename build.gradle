@@ -27,6 +27,7 @@ buildscript {
             maven { url "https://maven.aliyun.com/nexus/content/groups/public" }
             maven { url "https://${mirror_maven_url}" }
         }
+        maven { url 'https://ecdcaeb.github.io/maven/' }
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.outlands.top/releases' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
