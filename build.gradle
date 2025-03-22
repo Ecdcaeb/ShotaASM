@@ -35,7 +35,7 @@ buildscript {
         gradlePluginPortal()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.10.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.10.43', changing: true
         classpath "net.minecraftforge:gradlejarsigner:1.0.5"
         classpath "org.spongepowered:mixingradle:0.7.+"
     }
