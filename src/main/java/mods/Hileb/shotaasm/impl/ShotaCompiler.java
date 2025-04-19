@@ -39,7 +39,7 @@ public class ShotaCompiler implements IScriptCompiler {
                 return () -> {};
             } else return null;
         } else {
-            String singleName = file.name().substring(0, file.name().lastIndexOf('.')).replace('.', '_');
+            String singleName = file.name().substring(0, file.name().lastIndexOf('.')).replace('.', '_') + file.hashCode();
             String name = "mods.Hileb.shotaasm.dynamic." + singleName;
             StringBuilder builder = new StringBuilder("package mods.Hileb.shotaasm.dynamic;");
             for (String s : file.property().get("import")) {
@@ -72,7 +72,7 @@ public class ShotaCompiler implements IScriptCompiler {
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException |
                      ClassNotFoundException | MalformedURLException e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Unable to compile for " + file.name(), e);
             }
         }
     }
