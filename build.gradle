@@ -91,11 +91,24 @@ repositories {
         name 'CurseMaven'
         url 'https://curse.cleanroommc.com'
     }
+    maven {
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
+    }
+    maven {
+        name 'GTNH Maven'
+        url 'https://nexus.gtnewhorizons.com/repository/public/'
+    }
+    maven {
+        name 'GTCEu Maven'
+        url 'https://maven.gtceu.com'
+    }
 }
 
 
 dependencies {
     implementation 'curse.maven:resource-mod-loader-945917:5768125+5768126'
+    implementation 'com.cleanroommc:groovyscript:1.2.3'
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
     }
