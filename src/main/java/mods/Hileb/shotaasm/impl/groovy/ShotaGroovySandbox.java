@@ -20,7 +20,7 @@ public class ShotaGroovySandbox {
     Binding binding = new Binding(this.bindings);
     GroovyClassLoader classLoader;
 
-    public AbstractGroovySandbox() {
+    public ShotaGroovySandbox() {
         importCustomizer = new ImportCustomizer();
         config = new CompilerConfiguration();
 
