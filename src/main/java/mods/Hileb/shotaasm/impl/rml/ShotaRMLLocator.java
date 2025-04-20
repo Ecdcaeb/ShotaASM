@@ -6,7 +6,9 @@ import mods.Hileb.shotaasm.api.IScriptLocator;
 import mods.Hileb.shotaasm.api.ScriptFile;
 import mods.Hileb.shotaasm.api.ShotaContext;
 import net.minecraft.launchwrapper.Launch;
+
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import rml.loader.ResourceModLoader;
 import rml.loader.api.mods.module.ModuleType;
@@ -35,11 +38,11 @@ public class ShotaRMLLocator implements IScriptLocator {
 
                 try
                 {
-                    ScriptFile scriptFile = ScriptFile.create(key.toString().replace(':', '$'), new String(FileHelper.getByteSource(file).read()));
+                    ScriptFile scriptFile = ScriptFile.create(key.toString().replace(':', '$').replace('/', '$'), new String(FileHelper.getByteSource(file).read()));
                     scriptFile.data().put("rml_container", containerHolder);
                     list.add(scriptFile);
                 } catch (Exception e) {
-                    rml.loader.deserialize.RMLLoaderserror(
+                    rml.loader.deserialize.RMLLoaders.error(
                         Objects.requireNonNull(module, "module").moduleType, 
                         containerHolder, e, "Could not read file {}", key);
                 }
