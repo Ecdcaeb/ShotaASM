@@ -96,6 +96,7 @@ repositories {
 
 dependencies {
     implementation 'curse.maven:resource-mod-loader-945917:5768125+5768126'
+    implementation 'com.cleanroommc:groovyscript:1.2.3'
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
     }

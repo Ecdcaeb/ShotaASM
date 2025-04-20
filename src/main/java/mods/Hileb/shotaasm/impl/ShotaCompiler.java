@@ -16,12 +16,6 @@ import java.util.*;
 import java.lang.reflect.InvocationTargetException;
 
 public class ShotaCompiler implements IScriptCompiler {
-    private static final HashMultimap<String, Runnable> eventTasks = HashMultimap.create();
-
-    public static void executeEvent(String evt) {
-        eventTasks.get(evt).forEach(Runnable::run);
-        eventTasks.removeAll(evt);
-    }
 
     @Override
     public String name() {
@@ -35,7 +29,7 @@ public class ShotaCompiler implements IScriptCompiler {
         if (file.property().containsKey("event")) {
             String event = Iterables.getFirst(file.property().get("event"), null);
             if (event != null) {
-                eventTasks.put(event, () -> ShotaCompiler.this.compile(file));
+                EventHandler.addEvent(event, () -> ShotaCompiler.this.compile(file));
                 return () -> {};
             } else return null;
         } else {

@@ -4,6 +4,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import mods.Hileb.shotaasm.api.ShotaContext;
 import mods.Hileb.shotaasm.impl.ShotaCompiler;
+import mods.Hileb.shotaasm.impl.ErrorHandler;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
@@ -71,7 +72,7 @@ public class ShotaASM implements IFMLLoadingPlugin {
 
         @Subscribe
         public void onFMLState(FMLStateEvent event) {
-            ShotaCompiler.executeEvent(event.getEventType());
+            EventHandler.executeEvent(event.getEventType());
         }
 
     }
