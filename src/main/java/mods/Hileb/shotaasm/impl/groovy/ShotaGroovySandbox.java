@@ -29,11 +29,11 @@ public class ShotaGroovySandbox {
             "mods.Hileb.shotaasm.api.ShotaContext"
         );
         importCustomizer.addStarImports(
-            "org.objectweb.asm.*",
-            "org.objectweb.asm.tree.*",
-            "org.objectweb.asm.util.*",
-            "org.objectweb.asm.commons.*",
-            "org.objectweb.asm.signature.*"
+            "org.objectweb.asm",
+            "org.objectweb.asm.tree",
+            "org.objectweb.asm.util",
+            "org.objectweb.asm.commons",
+            "org.objectweb.asm.signature"
         );
         importCustomizer.addStaticStars("org.objectweb.asm.Opcodes");
         config.addCompilationCustomizers(importCustomizer);
