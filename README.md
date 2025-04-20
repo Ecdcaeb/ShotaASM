@@ -1,8 +1,13 @@
 ### ShotaASM
+
 <img src="https://github.com/Ecdcaeb/ShotaASM/blob/main/icon.png" alt="image" width="100" height="auto">
-a script mod enables you write asm codes in scripts
+
+a script mod enables you write asm codes in scripts.
+
+Check [Wiki](https://github.com/Ecdcaeb/ShotaASM/wiki) for details.
 
 #### example :
+
 ```java
 #compiler javaShota
 #import org.apache.logging.log4j.LogManager
@@ -26,6 +31,7 @@ TransformerRegistry.registerASMExplicitTransformer(-99 ,
 		}
 	}, "net.minecraft.client.Minecraft");
 ```
+
 ![image](https://github.com/user-attachments/assets/e89ec1cc-7cea-483d-a204-3c6d545466e1)
 
 
