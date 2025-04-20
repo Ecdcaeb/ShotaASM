@@ -41,7 +41,7 @@ public class ShotaGroovySandbox {
     }
 
     public Class<?> compile(String name, String text) {
-        return classLoader.parseClass(new String(this.getFile()), name);
+        return classLoader.parseClass(text, name);
     }
 
     public Runnable makeScript(Class<?> cls){
@@ -50,7 +50,7 @@ public class ShotaGroovySandbox {
     }
 
     static ShotaGroovySandbox box = null;
-    public static Runnable compile(String name, String file){
+    public static Runnable compileScript(String name, String file){
         if (box == null) box = new ShotaGroovySandbox();
         return box.makeScript(box.compile(name, file));
     }

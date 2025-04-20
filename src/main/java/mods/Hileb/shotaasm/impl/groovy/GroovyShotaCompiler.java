@@ -1,7 +1,12 @@
 package mods.Hileb.shotaasm.impl.groovy;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Iterables;
+
+import mods.Hileb.shotaasm.api.ShotaContext;
 import mods.Hileb.shotaasm.api.IScriptCompiler;
 import mods.Hileb.shotaasm.api.ScriptFile;
+import mods.Hileb.shotaasm.impl.EventHandler;
 
 public class GroovyShotaCompiler implements IScriptCompiler {
 
@@ -16,7 +21,7 @@ public class GroovyShotaCompiler implements IScriptCompiler {
             if (file.property().containsKey("event")) {
                 String event = Iterables.getFirst(file.property().get("event"), null);
                 if (event != null) {
-                    eventTasks.put(event, () -> GroovyShotaCompiler.this.compile(file));
+                    EventHandler.addEvent(event, () -> GroovyShotaCompiler.this.compile(file));
                     return () -> {};
                 } else throw new RuntimeException("Could not understand the first event property is null. At " + file.name());
             } else {
@@ -28,13 +33,13 @@ public class GroovyShotaCompiler implements IScriptCompiler {
                 }
                 builder.append("\n").append(file.text());
                 try {
-                    return ShotaGroovySandbox.compile(name, builder.toString());
+                    return ShotaGroovySandbox.compileScript(name, builder.toString());
                 } catch (Throwable e) {
                     throw new RuntimeException("Unable to compile for " + file.name(), e);
                 }
             }
         } else {
-            throw new RuntimeException("Groovy Support not found. But " + file.name() + " required the compiler of groovyShota.", e);
+            throw new RuntimeException("Groovy Support not found. But " + file.name() + " required the compiler of groovyShota.");
         }
     }
 }

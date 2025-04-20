@@ -4,7 +4,7 @@ import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
 import mods.Hileb.shotaasm.api.ShotaContext;
 import mods.Hileb.shotaasm.impl.ShotaCompiler;
-import mods.Hileb.shotaasm.impl.ErrorHandler;
+import mods.Hileb.shotaasm.impl.EventHandler;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
 import net.minecraftforge.fml.common.event.FMLStateEvent;
