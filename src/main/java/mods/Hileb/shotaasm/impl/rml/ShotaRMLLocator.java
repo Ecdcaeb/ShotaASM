@@ -5,10 +5,13 @@ import mods.Hileb.shotaasm.ScriptLoader;
 import mods.Hileb.shotaasm.api.IScriptLocator;
 import mods.Hileb.shotaasm.api.ScriptFile;
 import mods.Hileb.shotaasm.api.ShotaContext;
+
 import net.minecraft.launchwrapper.Launch;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.FilenameUtils;
+
+import org.apache.logging.log4j.message.FormattedMessage;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +24,7 @@ import java.util.Objects;
 
 import rml.loader.ResourceModLoader;
 import rml.loader.api.mods.module.ModuleType;
+import rml.loader.api.mods.ContainerHolder;
 import rml.jrx.utils.file.FileHelper;
 import net.minecraft.util.ResourceLocation;
 
@@ -42,7 +46,7 @@ public class ShotaRMLLocator implements IScriptLocator {
                     scriptFile.data().put("rml_container", containerHolder);
                     list.add(scriptFile);
                 } catch (Exception e) {
-                    rml.loader.deserialize.RMLLoaders.error(
+                    ErrorHandler.error(
                         Objects.requireNonNull(module, "module").moduleType, 
                         containerHolder, e, "Could not read file {}", key);
                 }
@@ -50,4 +54,20 @@ public class ShotaRMLLocator implements IScriptLocator {
         }
         return list;
     }
+
+    private static void ErrorHandler{
+        public static void runThrow(Throwable throwable, String msg, Object... args){
+            throw new RuntimeException(new FormattedMessage(msg, args).getFormattedMessage(), throwable);
+        }
+
+        public static boolean isForced(ContainerHolder containerHolder, ModuleType moduleType){
+            return containerHolder.hasModule(moduleType) && containerHolder.getModules().get(moduleType).forceLoaded;
+        }
+
+        public static void error(ModuleType moduleType, ContainerHolder containerHolder, Throwable throwable, String msg, Object... args){
+            if (isForced(containerHolder, moduleType)) runThrow(throwable, msg, args);
+            else ShotaASM.LOGGER.error(new FormattedMessage(msg, args).getFormattedMessage(), throwable);
+        }
+    }
+
 }
