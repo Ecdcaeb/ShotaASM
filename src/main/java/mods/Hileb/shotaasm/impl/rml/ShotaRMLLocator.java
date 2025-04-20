@@ -7,6 +7,7 @@ import mods.Hileb.shotaasm.api.ScriptFile;
 import mods.Hileb.shotaasm.api.ShotaContext;
 
 import net.minecraft.launchwrapper.Launch;
+import net.minecraft.util.ResourceLocation;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -26,7 +27,6 @@ import rml.loader.ResourceModLoader;
 import rml.loader.api.mods.module.ModuleType;
 import rml.loader.api.mods.ContainerHolder;
 import rml.jrx.utils.file.FileHelper;
-import net.minecraft.util.ResourceLocation;
 
 public class ShotaRMLLocator implements IScriptLocator {
 
@@ -55,7 +55,7 @@ public class ShotaRMLLocator implements IScriptLocator {
         return list;
     }
 
-    private static void ErrorHandler{
+    private static class ErrorHandler{
         public static void runThrow(Throwable throwable, String msg, Object... args){
             throw new RuntimeException(new FormattedMessage(msg, args).getFormattedMessage(), throwable);
         }
