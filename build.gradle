@@ -92,12 +92,8 @@ repositories {
         url 'https://curse.cleanroommc.com'
     }
     maven {
-        name 'GTNH Maven'
-        url 'https://nexus.gtnewhorizons.com/repository/public/'
-    }
-    maven {
-        name 'GTCEu Maven'
-        url 'https://maven.gtceu.com'
+        name 'BlameJared Maven'
+        url 'https://maven.blamejared.com'
     }
 }
 
