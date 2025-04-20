@@ -87,9 +87,15 @@ repositories {
         name 'CleanroomMC Maven'
         url 'https://maven.cleanroommc.com'
     }
+    maven {
+        name 'CurseMaven'
+        url 'https://curse.cleanroommc.com'
+    }
 }
 
+
 dependencies {
+    implementation 'curse.maven:resource-mod-loader-945917:5768125+5768126'
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
     }
