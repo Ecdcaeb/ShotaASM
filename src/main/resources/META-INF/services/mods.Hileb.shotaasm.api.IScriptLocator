@@ -1,2 +1,2 @@
-mods.Hileb.shotaasm.impl.ShotaScriptLocator
-mods.Hileb.shotaasm.impl.rml.ShotaRMLLocator
+mods.Hileb.scriptasm.impl.ScriptScriptLocator
+mods.Hileb.scriptasm.impl.rml.ScriptRMLLocator

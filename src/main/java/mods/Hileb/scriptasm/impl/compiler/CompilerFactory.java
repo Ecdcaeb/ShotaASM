@@ -1,9 +1,9 @@
-package mods.Hileb.shotaasm.impl.compiler;
+package mods.Hileb.scriptasm.impl.compiler;
 
 import com.google.common.collect.Iterables;
-import mods.Hileb.shotaasm.impl.compiler.virtual.VirtualFileManager;
-import mods.Hileb.shotaasm.impl.compiler.virtual.VirtualJavaFileObject;
-import mods.Hileb.shotaasm.ShotaASM;
+import mods.Hileb.scriptasm.impl.compiler.virtual.VirtualFileManager;
+import mods.Hileb.scriptasm.impl.compiler.virtual.VirtualJavaFileObject;
+import mods.Hileb.scriptasm.ScriptASM;
 
 import javax.tools.*;
 import java.io.*;
@@ -25,13 +25,13 @@ public class CompilerFactory{
             }
         }
 
-        if (ShotaASM.DEBUG) {
-            ShotaASM.LOGGER.info("Java Compiler Factory Debug.");
+        if (ScriptASM.DEBUG) {
+            ScriptASM.LOGGER.info("Java Compiler Factory Debug.");
             String s0 = "";
             for (File s : this.classpath) {
                 s0 = s0 + s;
             }
-            ShotaASM.LOGGER.info("Classpath : {}", s0);
+            ScriptASM.LOGGER.info("Classpath : {}", s0);
         }
     }
 

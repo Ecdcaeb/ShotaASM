@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm;
+package mods.Hileb.scriptasm;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;

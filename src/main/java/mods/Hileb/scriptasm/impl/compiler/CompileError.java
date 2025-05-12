@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.impl.compiler;
+package mods.Hileb.scriptasm.impl.compiler;
 
 public class CompileError extends Exception {
     public CompileError(String read){

@@ -1,8 +1,8 @@
-package mods.Hileb.shotaasm;
+package mods.Hileb.scriptasm;
 
 import com.google.common.collect.Iterables;
-import mods.Hileb.shotaasm.api.IScriptCompiler;
-import mods.Hileb.shotaasm.api.IScriptLocator;
+import mods.Hileb.scriptasm.api.IScriptCompiler;
+import mods.Hileb.scriptasm.api.IScriptLocator;
 import net.minecraft.launchwrapper.Launch;
 
 import java.io.BufferedReader;

@@ -1,8 +1,8 @@
-package mods.Hileb.shotaasm.impl.compiler;
+package mods.Hileb.scriptasm.impl.compiler;
 
 import com.google.common.collect.Iterables;
-import mods.Hileb.shotaasm.impl.compiler.virtual.VirtualFileManager;
-import mods.Hileb.shotaasm.impl.compiler.virtual.VirtualJavaFileObject;
+import mods.Hileb.scriptasm.impl.compiler.virtual.VirtualFileManager;
+import mods.Hileb.scriptasm.impl.compiler.virtual.VirtualJavaFileObject;
 
 import javax.tools.*;
 import java.io.*;

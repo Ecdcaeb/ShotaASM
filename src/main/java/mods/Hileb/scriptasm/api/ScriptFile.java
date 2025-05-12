@@ -1,6 +1,6 @@
-package mods.Hileb.shotaasm.api;
+package mods.Hileb.scriptasm.api;
 
-import mods.Hileb.shotaasm.ShotaASM;
+import mods.Hileb.scriptasm.ScriptASM;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
@@ -44,17 +44,17 @@ public record ScriptFile(String name, String text, Multimap<String, String> prop
                 }
             }
             if (!map.containsKey("compiler")) {
-                map.put("compiler", "javaShota");
+                map.put("compiler", "javaScript");
             }
 
-            if (ShotaASM.DEBUG) {
-                ShotaASM.LOGGER.info("Script Debug : {}", name);
-                ShotaASM.LOGGER.info("Processed Text : \n {}", nonCommentText.toString());
+            if (ScriptASM.DEBUG) {
+                ScriptASM.LOGGER.info("Script Debug : {}", name);
+                ScriptASM.LOGGER.info("Processed Text : \n {}", nonCommentText.toString());
             }
 
             return new ScriptFile(name, nonCommentText.toString(), map, new HashMap<>());
         } catch (Exception e) {
-            ShotaASM.LOGGER.error("Error creating ScriptFile for '{}': {}", name, e.getMessage(), e);
+            ScriptASM.LOGGER.error("Error creating ScriptFile for '{}': {}", name, e.getMessage(), e);
             return null;
         }
     }

@@ -1,2 +1,2 @@
-mods.Hileb.shotaasm.impl.ShotaCompiler
-mods.Hileb.shotaasm.impl.groovy.GroovyShotaCompiler
+mods.Hileb.scriptasm.impl.ScriptCompiler
+mods.Hileb.scriptasm.impl.groovy.GroovyScriptCompiler

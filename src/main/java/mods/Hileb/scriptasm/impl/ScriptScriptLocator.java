@@ -1,9 +1,9 @@
-package mods.Hileb.shotaasm.impl;
+package mods.Hileb.scriptasm.impl;
 
-import mods.Hileb.shotaasm.ShotaASM;
-import mods.Hileb.shotaasm.ScriptLoader;
-import mods.Hileb.shotaasm.api.IScriptLocator;
-import mods.Hileb.shotaasm.api.ScriptFile;
+import mods.Hileb.scriptasm.ScriptASM;
+import mods.Hileb.scriptasm.ScriptLoader;
+import mods.Hileb.scriptasm.api.IScriptLocator;
+import mods.Hileb.scriptasm.api.ScriptFile;
 import net.minecraft.launchwrapper.Launch;
 import org.apache.commons.io.IOUtils;
 
@@ -15,11 +15,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ShotaScriptLocator implements IScriptLocator {
+public class ScriptScriptLocator implements IScriptLocator {
 
     @Override
     public Collection<ScriptFile> getScripts() {
-        File root = new File(Launch.minecraftHome, "shotaasm");
+        File root = new File(Launch.minecraftHome, "scriptasm");
         if (!root.exists()) {
             root.mkdirs();
         }
@@ -31,7 +31,7 @@ public class ShotaScriptLocator implements IScriptLocator {
                     String name = file.getName();
                     ScriptFile scriptFile = ScriptFile.create(name, new String(IOUtils.toByteArray(Files.newBufferedReader(file.toPath()), StandardCharsets.UTF_8)));
                     if (scriptFile == null) {
-                        ShotaASM.LOGGER.error("error when locate script for {}", file.getAbsolutePath());
+                        ScriptASM.LOGGER.error("error when locate script for {}", file.getAbsolutePath());
                         continue;
                     }
                     scriptFile.data().put("file", file);

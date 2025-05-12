@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.impl.compiler.virtual;
+package mods.Hileb.scriptasm.impl.compiler.virtual;
 
 import javax.tools.*;
 import java.io.IOException;

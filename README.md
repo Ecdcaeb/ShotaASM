@@ -1,20 +1,20 @@
-### ShotaASM
+### ScriptASM
 
-<img src="https://github.com/Ecdcaeb/ShotaASM/blob/main/icon.png" alt="image" width="100" height="auto">
+<img src="https://github.com/Ecdcaeb/ScriptASM/blob/main/icon.png" alt="image" width="100" height="auto">
 
 a script mod enables you write asm codes in scripts.
 
-Check [Wiki](https://github.com/Ecdcaeb/ShotaASM/wiki) for details.
+Check [Wiki](https://github.com/Ecdcaeb/ScriptASM/wiki) for details.
 
 #### example :
 
 ```java
-#compiler javaShota
+#compiler javaScript
 #import org.apache.logging.log4j.LogManager
 #import org.apache.logging.log4j.Logger
 
-System.out.print("Shota Strat his own tests!!! ^o^");
-final Logger LOGGER = LogManager.getLogger("Cute shota");
+System.out.print("Script Strat his own tests!!! ^o^");
+final Logger LOGGER = LogManager.getLogger("Cute script");
 LOGGER.info("Now, i have my own logger!!");
 
 // Change the title
@@ -23,8 +23,8 @@ TransformerRegistry.registerASMExplicitTransformer(-99 ,
 		for (var mn :cn.methods) {
 			var itr = mn.instructions.iterator();
 			while (itr.hasNext()) {
-				if (itr.next() instanceof LdcInsnNode ldc && ldc.cst instanceof String str && str.startsWith("Cleanroom")) {
-					ldc.cst = str + " & Cute Shota";
+				if (itr.next() instanceof LdcInsnNode ldc && ldc.cst instanceof String str && str.startsWith("Cleanroom Loader")) {
+					ldc.cst = str + " & Cute Script";
 					LOGGER.info("change the title to {}", ldc.cst);
 				}
 			}
