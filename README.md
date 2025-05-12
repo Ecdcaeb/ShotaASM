@@ -30,6 +30,20 @@ TransformerRegistry.registerASMExplicitTransformer(-99 ,
 			}
 		}
 	}, "net.minecraft.client.Minecraft");
+
+// Arrors is infinite
+TransformerRegistry.registerASMExplicitTransformer(-99 , 
+ (cn) -> {
+		for (var mn :cn.methods) {
+			if ("isInfinite".equals(mn.name)){
+					mn.instructions.clear();
+					mn.visitInsn(Opcodes.ICONST_1);
+					mn.visitInsn(Opcodes.IRETURN);
+                    var itr = mn.instructions.iterator();
+                }
+		}
+	}, "net.minecraft.item.ItemArrow");
+
 ```
 
 ![image](https://github.com/user-attachments/assets/e89ec1cc-7cea-483d-a204-3c6d545466e1)
