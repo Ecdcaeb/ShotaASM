@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.api;
+package mods.Hileb.scriptasm.api;
 
 import java.util.Collection;
 

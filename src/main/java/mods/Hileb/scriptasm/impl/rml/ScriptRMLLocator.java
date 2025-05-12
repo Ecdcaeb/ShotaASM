@@ -1,10 +1,10 @@
-package mods.Hileb.shotaasm.impl.rml;
+package mods.Hileb.scriptasm.impl.rml;
 
-import mods.Hileb.shotaasm.ShotaASM;
-import mods.Hileb.shotaasm.ScriptLoader;
-import mods.Hileb.shotaasm.api.IScriptLocator;
-import mods.Hileb.shotaasm.api.ScriptFile;
-import mods.Hileb.shotaasm.api.ShotaContext;
+import mods.Hileb.scriptasm.ScriptASM;
+import mods.Hileb.scriptasm.ScriptLoader;
+import mods.Hileb.scriptasm.api.IScriptLocator;
+import mods.Hileb.scriptasm.api.ScriptFile;
+import mods.Hileb.scriptasm.api.ScriptContext;
 
 import net.minecraft.launchwrapper.Launch;
 import net.minecraft.util.ResourceLocation;
@@ -28,14 +28,14 @@ import rml.loader.api.mods.module.ModuleType;
 import rml.loader.api.mods.ContainerHolder;
 import rml.jrx.utils.file.FileHelper;
 
-public class ShotaRMLLocator implements IScriptLocator {
+public class ScriptRMLLocator implements IScriptLocator {
 
     @Override
     public Collection<ScriptFile> getScripts() {
         final List<ScriptFile> list = new ArrayList<>();
 
-        if (ShotaContext.isClassExist("rml.loader.ResourceModLoader")) {
-            ResourceModLoader.loadModuleFindAssets(ModuleType.valueOf(new ResourceLocation("shotaasm", "shotaasm")), (containerHolder, module, root, file) -> {
+        if (ScriptContext.isClassExist("rml.loader.ResourceModLoader")) {
+            ResourceModLoader.loadModuleFindAssets(ModuleType.valueOf(new ResourceLocation("scriptasm", "scriptasm")), (containerHolder, module, root, file) -> {
                 String relative = root.relativize(file).toString();
                 String name = FilenameUtils.removeExtension(relative).replaceAll("\\\\", "/");
                 ResourceLocation key = new ResourceLocation(containerHolder.getContainer().getModId(), name);
@@ -66,7 +66,7 @@ public class ShotaRMLLocator implements IScriptLocator {
 
         public static void error(ModuleType moduleType, ContainerHolder containerHolder, Throwable throwable, String msg, Object... args){
             if (isForced(containerHolder, moduleType)) runThrow(throwable, msg, args);
-            else ShotaASM.LOGGER.error(new FormattedMessage(msg, args).getFormattedMessage(), throwable);
+            else ScriptASM.LOGGER.error(new FormattedMessage(msg, args).getFormattedMessage(), throwable);
         }
     }
 

@@ -1,10 +1,10 @@
-package mods.Hileb.shotaasm.impl;
+package mods.Hileb.scriptasm.impl;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Iterables;
-import mods.Hileb.shotaasm.api.IScriptCompiler;
-import mods.Hileb.shotaasm.api.ScriptFile;
-import mods.Hileb.shotaasm.impl.compiler.*;
+import mods.Hileb.scriptasm.api.IScriptCompiler;
+import mods.Hileb.scriptasm.api.ScriptFile;
+import mods.Hileb.scriptasm.impl.compiler.*;
 import net.minecraft.launchwrapper.Launch;
 
 import java.io.File;
@@ -15,11 +15,11 @@ import java.util.*;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class ShotaCompiler implements IScriptCompiler {
+public class ScriptCompiler implements IScriptCompiler {
 
     @Override
     public String name() {
-        return "javaShota";
+        return "javaScript";
     }
 
     @Override
@@ -29,19 +29,19 @@ public class ShotaCompiler implements IScriptCompiler {
         if (file.property().containsKey("event")) {
             String event = Iterables.getFirst(file.property().get("event"), null);
             if (event != null) {
-                EventHandler.addEvent(event, () -> ShotaCompiler.this.compile(file));
+                EventHandler.addEvent(event, () -> ScriptCompiler.this.compile(file));
                 return () -> {};
             } else return null;
         } else {
             String singleName = file.name().substring(0, file.name().lastIndexOf('.')).replace('.', '_') + file.hashCode();
-            String name = "mods.Hileb.shotaasm.dynamic." + singleName;
-            StringBuilder builder = new StringBuilder("package mods.Hileb.shotaasm.dynamic;");
+            String name = "mods.Hileb.scriptasm.dynamic." + singleName;
+            StringBuilder builder = new StringBuilder("package mods.Hileb.scriptasm.dynamic;");
             for (String s : file.property().get("import")) {
                 builder.append("import ").append(s).append(";\n");
             }
             builder
-                    .append("import mods.Hileb.shotaasm.api.TransformerRegistry;")
-                    .append("import mods.Hileb.shotaasm.api.ShotaContext;")
+                    .append("import mods.Hileb.scriptasm.api.TransformerRegistry;")
+                    .append("import mods.Hileb.scriptasm.api.ScriptContext;")
                     .append("import org.objectweb.asm.*;")
                     .append("import org.objectweb.asm.tree.*;")
                     .append("import org.objectweb.asm.util.*;")

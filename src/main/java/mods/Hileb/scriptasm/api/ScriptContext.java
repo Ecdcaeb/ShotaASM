@@ -1,6 +1,6 @@
-package mods.Hileb.shotaasm.api;
+package mods.Hileb.scriptasm.api;
 
-public class ShotaContext {
+public class ScriptContext {
     public static void initialize() {}
 
     public static boolean isClassExist(String name) {
@@ -8,6 +8,6 @@ public class ShotaContext {
     }
     
     public static java.util.Set<String> supportedCompilers() {
-        return mods.Hileb.shotaasm.ScriptLoader.compilers.keySet();
+        return mods.Hileb.scriptasm.ScriptLoader.compilers.keySet();
     }
 }

@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.impl.groovy;
+package mods.Hileb.scriptasm.impl.groovy;
 
 import org.codehaus.groovy.control.customizers.ImportCustomizer;
 import org.codehaus.groovy.control.CompilerConfiguration;
@@ -7,12 +7,12 @@ import groovy.lang.Binding;
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.Script;
 import org.codehaus.groovy.runtime.InvokerHelper;
-import mods.Hileb.shotaasm.api.ScriptFile;
+import mods.Hileb.scriptasm.api.ScriptFile;
 import net.minecraft.launchwrapper.Launch;
 
 import java.util.*;
 
-public class ShotaGroovySandbox {
+public class ScriptGroovySandbox {
 
     ImportCustomizer importCustomizer = new ImportCustomizer();
     CompilerConfiguration config = new CompilerConfiguration();
@@ -20,13 +20,13 @@ public class ShotaGroovySandbox {
     Binding binding = new Binding(this.bindings);
     GroovyClassLoader classLoader;
 
-    public ShotaGroovySandbox() {
+    public ScriptGroovySandbox() {
         importCustomizer = new ImportCustomizer();
         config = new CompilerConfiguration();
 
         importCustomizer.addImports(
-            "mods.Hileb.shotaasm.api.TransformerRegistry",
-            "mods.Hileb.shotaasm.api.ShotaContext"
+            "mods.Hileb.scriptasm.api.TransformerRegistry",
+            "mods.Hileb.scriptasm.api.ScriptContext"
         );
         importCustomizer.addStarImports(
             "org.objectweb.asm",
@@ -49,9 +49,9 @@ public class ShotaGroovySandbox {
         return script::run ;
     }
 
-    static ShotaGroovySandbox box = null;
+    static ScriptGroovySandbox box = null;
     public static Runnable compileScript(String name, String file){
-        if (box == null) box = new ShotaGroovySandbox();
+        if (box == null) box = new ScriptGroovySandbox();
         return box.makeScript(box.compile(name, file));
     }
 }

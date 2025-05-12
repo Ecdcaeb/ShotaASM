@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.impl;
+package mods.Hileb.scriptasm.impl;
 
 import com.google.common.collect.HashMultimap;
 

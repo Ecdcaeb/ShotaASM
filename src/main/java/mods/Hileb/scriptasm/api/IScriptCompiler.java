@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm.api;
+package mods.Hileb.scriptasm.api;
 
 public interface IScriptCompiler {
     String name();

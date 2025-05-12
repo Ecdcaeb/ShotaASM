@@ -1,7 +1,7 @@
 [
     {
-        "name" : "shotaasm:shotaasm",
+        "name" : "scriptasm:scriptasm",
         "isFile" : false,
-        "defaultLocation" : "mods/shotaasm"
+        "defaultLocation" : "mods/scriptasm"
     }
 ]

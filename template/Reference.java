@@ -1,4 +1,4 @@
-package mods.Hileb.shotaasm;
+package mods.Hileb.scriptasm;
 
 /**
  * Tags storage class, you can change at will
