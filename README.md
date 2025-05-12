@@ -23,13 +23,27 @@ TransformerRegistry.registerASMExplicitTransformer(-99 ,
 		for (var mn :cn.methods) {
 			var itr = mn.instructions.iterator();
 			while (itr.hasNext()) {
-				if (itr.next() instanceof LdcInsnNode ldc && ldc.cst instanceof String str && str.startsWith("Cleanroom Loader")) {
+				if (itr.next() instanceof LdcInsnNode ldc && ldc.cst instanceof String str && str.startsWith("Cleanroom")) {
 					ldc.cst = str + " & Cute Shota";
 					LOGGER.info("change the title to {}", ldc.cst);
 				}
 			}
 		}
 	}, "net.minecraft.client.Minecraft");
+
+// Arrors is infinite
+TransformerRegistry.registerASMExplicitTransformer(-99 , 
+ (cn) -> {
+		for (var mn :cn.methods) {
+			if ("isInfinite".equals(mn.name)){
+					mn.instructions.clear();
+					mn.visitInsn(Opcodes.ICONST_1);
+					mn.visitInsn(Opcodes.IRETURN);
+                    var itr = mn.instructions.iterator();
+                }
+		}
+	}, "net.minecraft.item.ItemArrow");
+
 ```
 
 ![image](https://github.com/user-attachments/assets/e89ec1cc-7cea-483d-a204-3c6d545466e1)
