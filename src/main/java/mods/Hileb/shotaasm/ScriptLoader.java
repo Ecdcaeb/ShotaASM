@@ -47,9 +47,11 @@ public class ScriptLoader {
 
     @SuppressWarnings("unchecked")
     public static <T> Collection<Class<? extends T>> loadServices(Class<T> cls) {
+        String name = cls.getName().replace("_script_", "shota").replace("_Script_", "Shota");
+        
         HashSet<Class<?>> clss = new HashSet<>();
         try {
-            Enumeration<URL> e = Launch.classLoader.getResources("META-INF/services/" + cls.getName());
+            Enumeration<URL> e = Launch.classLoader.getResources("META-INF/services/" + name);
             while (e.hasMoreElements()) {
                 URL url = e.nextElement();
                 try (InputStream stream = url.openStream()) {

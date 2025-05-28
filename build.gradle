@@ -48,6 +48,16 @@ java {
     }
 }
 
+sourceSets {
+    main {
+    }
+    asm {
+        java {
+            srcDir 'src/asm/java'
+        }
+    }
+}
+
 configurations {
     embed
     contain
@@ -107,8 +117,12 @@ repositories {
 
 
 dependencies {
+    asmImplementation 'org.ow2.asm:asm:9.+'
+    asmImplementation 'org.ow2.asm:asm-util:9.+'
+
     implementation 'curse.maven:resource-mod-loader-945917:5768125+5768126'
     implementation 'com.cleanroommc:groovyscript:1.2.3'
+
     if (propertyBool('use_asset_mover')) {
         implementation "com.cleanroommc:assetmover:${propertyString('asset_mover_version')}"
     }
@@ -201,6 +215,41 @@ compileTestJava {
     sourceCompatibility = targetCompatibility = JavaVersion.VERSION_21
 }
 
+compileAsmJava {
+    dependsOn compileJava
+}
+
+tasks.register('transformShota', JavaExec) {
+    group = 'build'
+    description = 'replace the shota with script'
+    
+    dependsOn(tasks.jar)
+    
+    mainClass.set('com.example.AsmTransformer')
+    
+    classpath = sourceSets.asm.runtimeClasspath
+    
+    def inputJar = layout.buildDirectory.file("libs/${project.name}-${project.version}.jar")
+    def outputJar = layout.buildDirectory.file("libs/${project.name}-${project.version}-cf.jar")
+    
+    args(inputJar, outputJar)
+    
+    doFirst {
+        outputJar.get().asFile.parentFile.mkdirs()
+        if (!inputJar.get().asFile.exists()) {
+            throw new GradleException("Input JAR not found: ${inputJar.get().asFile}")
+        }
+    }
+    
+    artifacts {
+        archives(outputJar)
+    }
+}
+
+tasks.named('assemble') {
+    dependsOn(tasks.transformShota)
+}
+
 test {
     useJUnitPlatform()
     javaLauncher.set(javaToolchains.launcherFor {
@@ -241,6 +290,7 @@ def injectTags() {
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
+
 
 apply from: 'gradle/scripts/publishing.gradle'
 apply from: 'gradle/scripts/extra.gradle'

@@ -17,8 +17,6 @@ import java.util.*;
 
 import java.io.File;
 
-@IFMLLoadingPlugin.Name(ShotaASM.NAME)
-@IFMLLoadingPlugin.MCVersion(net.minecraftforge.common.ForgeVersion.mcVersion)
 public class ShotaASM implements IFMLLoadingPlugin {
     public static final String NAME = Reference.MOD_NAME;
     public static final String MOD_ID = Reference.MOD_ID;
